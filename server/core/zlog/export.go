@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"path"
-	"runtime"
 )
 
 func Info(msg string) {
@@ -57,7 +55,8 @@ func Fatalf(tmplt string, args ...interface{}) {
 }
 
 func do(l zapcore.Level, tmplt string, args ...interface{}) {
-	field := getCallerInfoForLog()
+	// 留个field字段便于以后要插东西
+	var field []zapcore.Field
 	msg := formatMsg(tmplt, args)
 	switch l {
 	case zapcore.DebugLevel:
@@ -81,15 +80,4 @@ func formatMsg(template string, args []interface{}) string {
 		return args[0].(string)
 	}
 	return fmt.Sprintf(template, args...)
-}
-
-func getCallerInfoForLog() (callerFields []zap.Field) {
-	pc, file, line, ok := runtime.Caller(2) // 回溯两层，拿到写日志的调用方的函数信息
-	if !ok {
-		return
-	}
-	funcName := runtime.FuncForPC(pc).Name()
-	funcName = path.Base(funcName) //Base函数返回路径的最后一个元素，只保留函数名
-	callerFields = append(callerFields, zap.String("func", funcName), zap.String("file", file), zap.Int("line", line))
-	return
 }

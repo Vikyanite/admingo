@@ -8,8 +8,4 @@ type Config struct {
 	logRoll lumberjack.Logger `yaml:"lumberjack"`
 }
 
-var c *Config
-
-func init() {
-
-}
+var logConfig *Config
