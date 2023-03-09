@@ -1,13 +1,13 @@
 package zlog
 
 import (
+	"errors"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"testing"
 )
 
 func init() {
 	logConfig = &Config{
-		JSONEncoder: false,
 		logRoll: lumberjack.Logger{
 			Filename:   "../../log/test.log",
 			MaxSize:    100,
@@ -61,4 +61,8 @@ func TestPanic(t *testing.T) {
 
 func TestFatal(t *testing.T) {
 	Fatal("hi")
+}
+
+func TestMustNil(t *testing.T) {
+	MustNil(errors.New("hi"))
 }
