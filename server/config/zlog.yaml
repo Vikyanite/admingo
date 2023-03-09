@@ -1,0 +1,7 @@
+JSONEncoder: false
+lumberjack:
+  filename: "./log"
+  maxsize: 100
+  maxage: 1
+  maxbackups: 60
+  compress: false
