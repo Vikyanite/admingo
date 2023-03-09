@@ -1,6 +1,5 @@
-JSONEncoder: false
 lumberjack:
-  filename: "./log"
+  filename: "./log/test.log"
   maxsize: 100
   maxage: 1
   maxbackups: 60
