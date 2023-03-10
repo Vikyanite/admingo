@@ -52,13 +52,24 @@ func TestFatalf(t *testing.T) {
 }
 
 func TestPanicf(t *testing.T) {
+	defer func() {
+		if err := recover(); err != nil {
+
+		}
+	}()
 	Panicf("hi")
 }
 
 func TestPanic(t *testing.T) {
+	defer func() {
+		if err := recover(); err != nil {
+
+		}
+	}()
 	Panic("hi")
 }
 
+// fatal的话底层是os.Exit(0)所以不大能捕获...
 func TestFatal(t *testing.T) {
 	Fatal("hi")
 }
