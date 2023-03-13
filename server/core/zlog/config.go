@@ -7,11 +7,13 @@ import (
 
 type Config struct {
 	// 因为zaplog没有分割日志文件的功能，所以采用lumberjack
-	logRoll lumberjack.Logger `yaml:"lumberjack"`
+	logRoll *lumberjack.Logger `yaml:"lumberjack"`
 }
 
-var logConfig *Config
+var logConfig = Config{
+	logRoll: &lumberjack.Logger{},
+}
 
 func init() {
-	viperx.Register("zlog", logConfig)
+	viperx.Register("zlog", &logConfig)
 }

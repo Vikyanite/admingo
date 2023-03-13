@@ -12,7 +12,7 @@ func Init() {
 		vip.AddConfigPath("./config") //设置读取的文件路径
 		vip.SetConfigName(k)
 		// 读取配置
-		if err := viper.ReadInConfig(); err != nil {
+		if err := vip.ReadInConfig(); err != nil {
 			log.Fatal("读取不到配置文件：" + err.Error())
 		}
 		if err := vip.Unmarshal(v); err != nil {

@@ -30,7 +30,7 @@ func Init() {
 	core := zapcore.NewTee(
 		// 同时向控制台和文件写日志， 生产环境记得把控制台写入去掉，日志记录的基本是Debug 及以上，生产环境记得改成Info
 		zapcore.NewCore(consoleEncoder, zapcore.AddSync(os.Stdout), zapcore.DebugLevel),
-		zapcore.NewCore(fileEncoder, zapcore.AddSync(&logConfig.logRoll), zapcore.DebugLevel),
+		zapcore.NewCore(fileEncoder, zapcore.AddSync(logConfig.logRoll), zapcore.DebugLevel),
 	)
 	logger = zap.New(core, zap.AddCaller(), zap.AddCallerSkip(2))
 }
